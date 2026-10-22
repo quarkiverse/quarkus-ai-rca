@@ -11,7 +11,7 @@
 
     <groupId>io.quarkiverse.ai.rca</groupId>
     <artifactId>quarkus-ai-rca-parent</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.2</version>
     <packaging>pom</packaging>
 
     <name>Quarkus AI RCA Build</name>
@@ -23,7 +23,7 @@
         <connection>scm:git:git@github.com:quarkiverse/quarkus-ai-rca.git</connection>
         <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-ai-rca.git</developerConnection>
         <url>https://github.com/quarkiverse/quarkus-ai-rca</url>
-      <tag>HEAD</tag>
+      <tag>0.1.2</tag>
   </scm>
 
     <!-- ===================== -->
