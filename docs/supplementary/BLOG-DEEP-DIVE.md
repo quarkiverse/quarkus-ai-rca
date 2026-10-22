@@ -6,37 +6,7 @@ In the [introductory post](BLOG.md), we showed what AI Root Cause Analysis does 
 
 The system has a layered architecture connecting monitored applications to the AI analysis engine through an observability stack:
 
-```mermaid
-flowchart LR
-User[User]
-AI[AI Module]
-subgraph YourApps[Your Applications]
-App1[App 1]
-App2[App 2]
-end
-subgraph LGTM[LGTM Stack]
-Tempo[Tempo]
-Loki[Loki]
-Prom[Prometheus]
-end
-subgraph LLMs[LLM Providers]
-OpenAI[OpenAI]
-Grok[Grok]
-Gemini[Gemini]
-WatsonX[WatsonX]
-end
-User --> AI
-YourApps -.->|OTel| LGTM
-Tempo <-->|MCP| AI
-Loki <-->|MCP| AI
-Prom <-->|MCP| AI
-AI <-->|Dev MCP| YourApps
-AI -->|LangChain4j| LLMs
-style AI fill:#3498db,color:#fff
-style YourApps fill:#f5f5f5,stroke:#2ecc71
-style LGTM fill:#f5f5f5,stroke:#bbb
-style LLMs fill:#f5f5f5,stroke:#bbb
-```
+![Architecture](images/architecture.svg)
 
 Your applications just need OpenTelemetry instrumentation — no code changes required. The AI module connects to your existing LGTM stack via MCP and optionally to your running Quarkus applications via Dev MCP for source examination and dashboard generation.
 
@@ -66,25 +36,7 @@ When you hit `GET /analyze/{n}`, the following sequence unfolds:
 
 If source examination or dashboard generation is enabled, a post-analysis pipeline kicks in using `DevMcpAiService` — a separate `@RegisterAiService` that uses Dev MCP tools to read application source code and write Grafana dashboard JSON back to each workspace.
 
-```mermaid
-sequenceDiagram
-participant U as User
-participant AI as AI Module
-participant LGTM as LGTM
-participant LLM as LLM
-U->>AI: GET /analyze/n
-AI->>LLM: System prompt + tools
-loop Traces
-LLM->>LGTM: Get trace + logs
-LGTM-->>AI: Raw data
-AI-->>LLM: Stripped data (via StripMcpClient)
-end
-LLM->>LGTM: Get metrics
-LGTM-->>AI: Raw metrics
-AI-->>LLM: Filtered metrics
-LLM-->>AI: Analysis report
-AI-->>U: HTML / Markdown / Text
-```
+![Analysis Pipeline](images/blog-analysis-pipeline.svg)
 
 ## Data Filtering: Staying Within Context Limits
 
@@ -124,23 +76,13 @@ Beyond application-level chaos, the test suite also covers infrastructure-level 
 
 **Database chaos** routes JDBC connections through Toxiproxy to MySQL:
 
-```mermaid
-flowchart LR
-App[Test App] -->|JDBC| Toxi[Toxiproxy]
-Toxi -->|JDBC| DB[(MySQL)]
-style Toxi fill:#fdd,stroke:#c33
-```
+![DB Chaos Testing](images/blog-db-chaos.svg)
 
 Tests include slow queries (3s latency injection), connection pool exhaustion (4s latency + small pool + concurrent requests), and full database outages (connection cut). JDBC telemetry creates separate database query spans, so the AI sees `GET /poke (3019ms) → SELECT ... (3015ms)` and can identify database-level root causes.
 
 **Weather API chaos** routes REST client calls through Toxiproxy to an external API:
 
-```mermaid
-flowchart LR
-App[Test App] -->|REST| Toxi[Toxiproxy]
-Toxi -->|REST| API[External API]
-style Toxi fill:#fdd,stroke:#c33
-```
+![Weather Chaos Testing](images/blog-weather-chaos.svg)
 
 Tests include slow external API responses and full API outages.
 

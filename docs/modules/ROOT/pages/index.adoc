@@ -8,7 +8,7 @@ AI Root Cause Analysis (AI RCA) is a Quarkus-based system that uses LLMs to auto
 
 == Architecture
 
-image::architecture.svg[Architecture,opts=inline]
+image::architecture.svg[Architecture,width=100%]
 
 The AI module connects to your existing LGTM stack via MCP and to your running Quarkus applications via Dev MCP (for source examination and dashboard generation). Your applications just need OpenTelemetry instrumentation -- no code changes required.
 
@@ -16,7 +16,7 @@ The AI module is available as an uber-jar on Maven Central (`io.quarkiverse.ai.r
 
 == Analysis Pipeline
 
-image::analysis-pipeline.svg[Analysis Pipeline,opts=inline]
+image::analysis-pipeline.svg[Analysis Pipeline,width=100%]
 
 == LLM Providers
 
