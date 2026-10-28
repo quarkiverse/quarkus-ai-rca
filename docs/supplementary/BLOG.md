@@ -63,7 +63,7 @@ export OPENAI_API_KEY=sk-...   # or GROK_API_KEY for Grok
 # Option 1: Download via Maven
 mvn dependency:copy -Dartifact=io.quarkiverse.ai.rca:quarkus-ai-rca-core:RELEASE:jar:runner -DoutputDirectory=.
 
-# Option 2: Download via curl (replace VERSION with the latest release)
+# Option 2: Download via curl (find the latest VERSION at https://central.sonatype.com/search?q=quarkus-ai-rca-core)
 curl -O https://repo1.maven.org/maven2/io/quarkiverse/ai/rca/quarkus-ai-rca-core/VERSION/quarkus-ai-rca-core-VERSION-runner.jar
 
 # Run against your LGTM stack (Grafana on 3000, Tempo on 3200)

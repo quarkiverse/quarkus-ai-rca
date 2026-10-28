@@ -121,7 +121,7 @@ For production use with an existing LGTM instance, use the pre-built uber-jar:
 ./run-ai.sh http://localhost:3000 http://localhost:3200 8081,8082    # with app ports
 ```
 
-The uber-jar can also be downloaded from Maven Central as `io.quarkiverse.ai.rca:quarkus-ai-rca-core:<version>:jar:runner`.
+The uber-jar can also be downloaded from [Maven Central](https://central.sonatype.com/search?q=quarkus-ai-rca-core) as `io.quarkiverse.ai.rca:quarkus-ai-rca-core:<version>:jar:runner`.
 
 ### Manual LGTM (without DevServices)
 
