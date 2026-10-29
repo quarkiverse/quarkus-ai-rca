@@ -24,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 abstract class AppsTestBase {
 
+    static final double EVALUATION_THRESHOLD = Double.parseDouble(System.getProperty("evaluation.threshold", "70"));
+
     @Inject
     RcaAiService aiService;
 
@@ -105,8 +107,8 @@ abstract class AppsTestBase {
                 + " explanation=" + result.explanation());
         System.out.println("=== END " + label + " EVALUATION ===\n");
 
-        assertTrue(score >= 70.0,
-                label + ": evaluation score should be >= 70 (got " + score + ")");
+        assertTrue(score >= EVALUATION_THRESHOLD,
+                label + ": evaluation score should be >= " + (int) EVALUATION_THRESHOLD + " (got " + score + ")");
     }
 
     static String getSystemPrompt(String methodName) {
@@ -158,8 +160,8 @@ abstract class AppsTestBase {
                 + " explanation=" + result.explanation());
         System.out.println("=== END SOURCE EXAMINATION EVALUATION ===\n");
 
-        assertTrue(score >= 70.0,
-                "SOURCE EXAMINATION: evaluation score should be >= 70 (got " + score + ")");
+        assertTrue(score >= EVALUATION_THRESHOLD,
+                "SOURCE EXAMINATION: evaluation score should be >= " + (int) EVALUATION_THRESHOLD + " (got " + score + ")");
     }
 
     void generateDashboard(Runnable pokes, String criteria) throws Exception {
@@ -202,8 +204,8 @@ abstract class AppsTestBase {
                 + " explanation=" + result.explanation());
         System.out.println("=== END DASHBOARD GENERATION EVALUATION ===\n");
 
-        assertTrue(score >= 70.0,
-                "DASHBOARD GENERATION: evaluation score should be >= 70 (got " + score + ")");
+        assertTrue(score >= EVALUATION_THRESHOLD,
+                "DASHBOARD GENERATION: evaluation score should be >= " + (int) EVALUATION_THRESHOLD + " (got " + score + ")");
     }
 
 }

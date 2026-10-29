@@ -114,7 +114,7 @@ A judge LLM (`EvaluationJudge`) then scores the analysis on four dimensions, eac
 | **Correlation Quality** | Did it properly link traces, logs, and metrics? |
 | **Actionability** | Are the remediation suggestions useful and specific? |
 
-The passing threshold is **70/100**. If the score falls below 0.7, the evaluation also outputs **prompt improvement suggestions** — concrete changes to the system prompt that would improve analysis quality. This creates a feedback loop: run tests, get scores, improve the prompt, run tests again.
+The passing threshold defaults to **70/100** (configurable via `-Devaluation.threshold`). If the score falls below the threshold, the evaluation also outputs **prompt improvement suggestions** — concrete changes to the system prompt that would improve analysis quality. This creates a feedback loop: run tests, get scores, improve the prompt, run tests again.
 
 ### Cross-LLM Combinations
 

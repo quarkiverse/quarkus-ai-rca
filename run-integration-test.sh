@@ -38,10 +38,16 @@ case "$SCORER" in
     ;;
 esac
 
+THRESHOLD_ARG=""
+if [ -n "${EVALUATION_THRESHOLD:-}" ]; then
+  THRESHOLD_ARG="-Devaluation.threshold=$EVALUATION_THRESHOLD"
+fi
+
 echo "=== Running $TEST_CLASS ==="
 echo "  Test type: $TEST_TYPE"
 echo "  AI profile: $PROFILE"
 echo "  Scorer: ${SCORER:-openai (default)}"
+echo "  Threshold: ${EVALUATION_THRESHOLD:-70 (default)}"
 echo ""
 
-./mvnw clean test -pl ai -P"$MAVEN_PROFILE" -Dintegration.run=true -Dtest="$TEST_CLASS"
+./mvnw clean test -pl ai -P"$MAVEN_PROFILE" -Dintegration.run=true -Dtest="$TEST_CLASS" $THRESHOLD_ARG

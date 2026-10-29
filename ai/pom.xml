@@ -20,6 +20,7 @@
     <!-- ===================== -->
     <properties>
         <quarkus.package.jar.type>uber-jar</quarkus.package.jar.type>
+        <evaluation.threshold>70</evaluation.threshold>
     </properties>
 
     <!-- ===================== -->
@@ -116,6 +117,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <integration.run>${integration.run}</integration.run>
+                        <evaluation.threshold>${evaluation.threshold}</evaluation.threshold>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

@@ -55,7 +55,7 @@ class EvaluationJudge {
         }
 
         boolean passes() {
-            return total() >= 70;
+            return total() >= AppsTestBase.EVALUATION_THRESHOLD;
         }
 
         @Override

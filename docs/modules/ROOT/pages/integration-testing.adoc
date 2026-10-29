@@ -49,6 +49,18 @@ Pass an empty string `''` for scorer to use the default (openai).
 ./run-integration-methods.sh weather openai grok analyzeWeatherSlowApi
 ----
 
+=== Evaluation Threshold
+
+The passing threshold defaults to *70/100*. Set `EVALUATION_THRESHOLD` to override it for any test script:
+
+[source,bash]
+----
+export EVALUATION_THRESHOLD=80
+./run-integration-test.sh chaos                    # chaos tests with threshold 80
+./run-integration-test.sh db grok grok             # DB tests with threshold 80
+./run-integration-test.sh weather openai grok      # weather tests with threshold 80
+----
+
 == Chaos Test Scenarios
 
 [cols="1,2,3"]
